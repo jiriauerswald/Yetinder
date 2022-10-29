@@ -1,0 +1,30 @@
+{% extends 'yetinder.html.twig' %}
+{% block title %}Best of Yeti | {{parent()}}{% endblock %}
+{% block best_of %}
+{% for name, yeti in yetinder%}
+<div class="col">
+	<div class="card mb-4 rounded-3 shadow-sm">
+		<div class="card-header py-3">
+			<h4 class="my-0 fw-normal">
+				{{ name }}
+			</h4>
+		</div>
+		<div class="card-body">
+			<h1 class="card-title pricing-card-title">
+				<small class="text-muted fw-light">Score: </small>{{ yeti.score }}
+			</h1>
+			<ul class="list-unstyled mt-3 mb-4">
+
+				<li>Height: {{ yeti.height }}</li>
+				<li>Age: {{ yeti.age }}</li>
+				<li>Sex: {{ yeti.sex }}</li>
+				<li>Interested in: {{ yeti.interest }}</li>
+
+			</ul>
+			<button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign
+				up for free</button>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
