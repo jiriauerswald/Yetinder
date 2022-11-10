@@ -91,16 +91,16 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Best Of</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Crerate</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="/">Best Of</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="/add">Add New</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="#">Stats</a>
 {#         <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>#}
       </nav>
     </div>
 
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Best of</h1>
-      <p class="fs-5 text-muted">Best Yetis you could find in Yetinder</p>
+      <h1 class="display-4 fw-normal">{% block page_title %}To be defined in child template{% endblock %}</h1>
+      <p class="fs-5 text-muted">{% block page_description %}{% endblock %}</p>
     </div>
   </header>
 
@@ -109,7 +109,8 @@
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     
     {% block best_of %}{% endblock%}
-
+	{% block add_new_yeti %}{% endblock%}
+	
     </div>
 
     <h2 class="display-6 text-center mb-4">Compare plans</h2>

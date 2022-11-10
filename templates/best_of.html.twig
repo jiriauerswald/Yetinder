@@ -1,5 +1,10 @@
 {% extends 'yetinder.html.twig' %}
+
 {% block title %}Best of Yeti | {{parent()}}{% endblock %}
+
+{% block page_title %}Best Of Yeti{% endblock %}
+{% block page_description %} Best Yetis you could find in Yetinder {% endblock %}
+
 {% block best_of %}
 {% for name, yeti in yetinder%}
 <div class="col">
@@ -17,12 +22,14 @@
 
 				<li>Height: {{ yeti.height }}</li>
 				<li>Age: {{ yeti.age }}</li>
-				<li>Sex: {{ yeti.sex }}</li>
+				<li>Sex: {{ yeti.gender }}</li>
 				<li>Interested in: {{ yeti.interest }}</li>
 
 			</ul>
+			{#
 			<button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign
 				up for free</button>
+			#}	
 		</div>
 	</div>
 </div>

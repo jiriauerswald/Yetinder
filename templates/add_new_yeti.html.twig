@@ -1,0 +1,11 @@
+{% extends 'yetinder.html.twig' %}
+{% block title %}Add new Yeti | {{parent()}}{% endblock %}
+
+{% block page_title %}Add new Yeti{% endblock %}
+{% block page_description %} Here you can create your own Yeti {% endblock %}
+
+{% block add_new_yeti %}
+
+	{{ form(add_new_yeti_form) }}
+
+{% endblock %}
