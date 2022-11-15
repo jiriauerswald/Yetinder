@@ -6,24 +6,25 @@
 {% block page_description %} Best Yetis you could find in Yetinder {% endblock %}
 
 {% block best_of %}
-{% for name, yeti in yetinder%}
+{% for yeti in yetinder%}
 <div class="col">
 	<div class="card mb-4 rounded-3 shadow-sm">
 		<div class="card-header py-3">
 			<h4 class="my-0 fw-normal">
-				{{ name }}
+				{{ yeti.name }}
 			</h4>
 		</div>
 		<div class="card-body">
 			<h1 class="card-title pricing-card-title">
-				<small class="text-muted fw-light">Score: </small>{{ yeti.score }}
+				<small class="text-muted fw-light">Score: </small>{{ yeti.height }} {# temporarily cahnged from score to height #}
 			</h1>
 			<ul class="list-unstyled mt-3 mb-4">
 
 				<li>Height: {{ yeti.height }}</li>
+				<li>Weight: {{ yeti.weight }}</li>
 				<li>Age: {{ yeti.age }}</li>
-				<li>Sex: {{ yeti.gender }}</li>
-				<li>Interested in: {{ yeti.interest }}</li>
+				<li>Gender: {{ yeti.gender }}</li>
+				<li>Residence: {{ yeti.residence }}</li>
 
 			</ul>
 			{#

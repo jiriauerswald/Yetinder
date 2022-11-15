@@ -25,6 +25,10 @@ class Yeti
     #[ORM\Column(type: Types::SMALLINT)]
     #[Assert\NotBlank]
     private ?int $height = null;
+    
+    #[ORM\Column(type: Types::SMALLINT)]
+    #[Assert\NotBlank]
+    private ?int $weight = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
@@ -32,7 +36,7 @@ class Yeti
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    private ?string $interest = null;
+    private ?string $residence = null;
 
     #[ORM\Column]
     private ?int $score = null;
@@ -78,26 +82,38 @@ class Yeti
         return $this;
     }
 
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+    
+    public function setWeight(int $weight): self
+    {
+        $this->weight = $weight;
+        
+        return $this;
+    }
+    
     public function getGender(): ?string
     {
         return $this->gender;
     }
 
-    public function setGender(string $sex): self
+    public function setGender(string $gender): self
     {
-        $this->gender = $sex;
+        $this->gender = $gender;
 
         return $this;
     }
 
-    public function getInterest(): ?string
+    public function getResidence(): ?string
     {
-        return $this->interest;
+        return $this->residence;
     }
 
-    public function setInterest(string $interest): self
+    public function setResidence(string $residence): self
     {
-        $this->interest = $interest;
+        $this->residence = $residence;
 
         return $this;
     }
