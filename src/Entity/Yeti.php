@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: YetiRepository::class)]
+#[UniqueEntity('name')]
 class Yeti
 {
     #[ORM\Id]
@@ -14,7 +15,7 @@ class Yeti
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     #[Assert\NotBlank]
     private ?string $name = null;
 

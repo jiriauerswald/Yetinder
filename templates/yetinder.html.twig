@@ -10,10 +10,16 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/pricing/">
 
-    
 
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        	<div class="flash-{{ label }}">
+                {{ message }}
+        	</div>
+        {% endfor %}
+    {% endfor %}
     
-
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <style>

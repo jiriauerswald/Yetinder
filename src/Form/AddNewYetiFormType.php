@@ -32,7 +32,7 @@ class AddNewYetiFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // 'data_class' => Yeti::class,
+            //'data_class' => Yeti::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'yeti_item'
