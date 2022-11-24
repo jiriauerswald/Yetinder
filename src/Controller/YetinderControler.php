@@ -13,7 +13,6 @@ use Doctrine\DBAL\DriverManager;
 class YetinderControler extends AbstractController
 {
 
-    # [Route('/')]
     /**
      *
      * @Route("/", name="bestOf")
@@ -25,16 +24,41 @@ class YetinderControler extends AbstractController
         $conn = DriverManager::getConnection([
             'url' => 'mysql://root:@localhost/yetinder'
         ]);
-        $query = 'SELECT * FROM yeti ORDER BY height DESC LIMIT 10';
+        //TODO limit value to shouldnt be hardcoded
+        $query = 'SELECT * FROM yetis ORDER BY height DESC LIMIT 10';
         $bestOf = $conn->fetchAllAssociative($query);
-
-        // dd($bestOf);
-        // TODO fetch 10 yetis from db sorted by score decs
 
         return $this->render('best_of.html.twig', [
             'yetinder' => $bestOf
         ]);
     }
+    
+    /**
+     *
+     * @Route("/tinder", name="tinder")
+     */
+    public function tinder(): Response
+    {
+        
+        // TODO change parameter or getConnection to use .env to get url from there
+        $conn = DriverManager::getConnection([
+            'url' => 'mysql://root:@localhost/yetinder'
+        ]);
+        $yetisIds = $conn->fetchAllAssociative('SELECT yeti_id FROM yetis');
+
+        $randomYetiId = $yetisIds[array_rand($yetisIds)]['yeti_id'];
+
+        if (isset($randomYetiId)){
+            $randomYetiQuery = $conn->prepare('SELECT * FROM yetis WHERE yeti_id = ?');
+            $randomYetiQuery->bindValue(1, $randomYetiId);
+            $yeti = $randomYetiQuery->executeQuery()->fetchAssociative();
+        }
+   
+        return $this->render('tinder.html.twig', [
+            'yeti' => $yeti
+        ]);
+    }
+    
 
     /**
      *
@@ -49,11 +73,6 @@ class YetinderControler extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $yeti = $form->getData();
-
-            
-            /* SELECT COUNT(column_name)
-            FROM table_name
-            WHERE condition; */
             
             // TODO change parameter or getConnection to use .env to get url from there
             $conn = DriverManager::getConnection([
