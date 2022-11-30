@@ -26,13 +26,12 @@ class AddNewYetiFormType extends AbstractType
         ])
             ->add('residence')
             ->add('submit', SubmitType::class);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            //'data_class' => Yeti::class,
+            // 'data_class' => Yeti::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'yeti_item'

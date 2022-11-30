@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Entity\Yeti;
 use App\Form\AddNewYetiFormType;
+use App\Form\RateYetiFormType;
 use Doctrine\DBAL\DriverManager;
 
 class YetinderControler extends AbstractController
@@ -22,43 +23,75 @@ class YetinderControler extends AbstractController
 
         // TODO change parameter or getConnection to use .env to get url from there
         $conn = DriverManager::getConnection([
-            'url' => 'mysql://root:@localhost/yetinder'
+            'url' => $this->getParameter('DATABASE_URL')
         ]);
-        //TODO limit value to shouldnt be hardcoded
-        $query = 'SELECT * FROM yetis ORDER BY height DESC LIMIT 10';
+        // TODO limit value to shouldnt be hardcoded
+        
+        //Only rated yetis are selected.
+        $query = '
+        SELECT
+        yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
+        FROM `yetis` INNER JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id 
+        GROUP BY yetis.yeti_id 
+        ORDER BY average_rating
+        DESC LIMIT 10';
         $bestOf = $conn->fetchAllAssociative($query);
-
         return $this->render('best_of.html.twig', [
             'yetinder' => $bestOf
         ]);
     }
-    
+
     /**
      *
      * @Route("/tinder", name="tinder")
      */
-    public function tinder(): Response
+    public function tinder(Request $request): Response
     {
-        
-        // TODO change parameter or getConnection to use .env to get url from there
         $conn = DriverManager::getConnection([
-            'url' => 'mysql://root:@localhost/yetinder'
+            'url' => $this->getParameter('DATABASE_URL')
         ]);
         $yetisIds = $conn->fetchAllAssociative('SELECT yeti_id FROM yetis');
 
+        $form = $this->createForm(RateYetiFormType::class);
+        $form->handleRequest($request);
+
         $randomYetiId = $yetisIds[array_rand($yetisIds)]['yeti_id'];
 
-        if (isset($randomYetiId)){
+        // fetch yeti with radnomly selected id from database
+        if (isset($randomYetiId)) {
             $randomYetiQuery = $conn->prepare('SELECT * FROM yetis WHERE yeti_id = ?');
             $randomYetiQuery->bindValue(1, $randomYetiId);
             $yeti = $randomYetiQuery->executeQuery()->fetchAssociative();
         }
-   
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $rating = $form->getData();
+            $queryBuilder = $conn->createQueryBuilder();
+            $queryBuilder->insert('ratings')
+                ->values([
+                'yeti_id' => '?',
+                'value' => '?'
+            ])
+                ->setParameter(0, $rating["yeti_id"])
+                ->setParameter(1, $rating["rating"]);
+            $result = $queryBuilder->executeStatement();
+            if ($result > 0) {
+                $this->addFlash('notice', 'Rating stored!');
+            }
+
+            return $this->redirectToRoute($request->attributes->get('_route'));
+        }
+
+        if (! $form->isSubmitted()) {
+            $form->get('yeti_id')->setData($randomYetiId);
+        }
+
         return $this->render('tinder.html.twig', [
-            'yeti' => $yeti
+            'yeti' => $yeti,
+            'rate_yeti_form' => $form->createView()
         ]);
     }
-    
 
     /**
      *
@@ -67,19 +100,18 @@ class YetinderControler extends AbstractController
     public function addNewYeti(Request $request): Response
     {
         $form = $this->createForm(AddNewYetiFormType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $yeti = $form->getData();
-            
+
             // TODO change parameter or getConnection to use .env to get url from there
             $conn = DriverManager::getConnection([
                 'url' => 'mysql://root:@localhost/yetinder'
             ]);
-            
-            //Check if entered name already exists in db
+
+            // Check if entered name already exists in db
             $query = $conn->prepare("SELECT COUNT(name) FROM yeti WHERE name = ?");
             $query->bindValue(1, $yeti["name"]);
             $nameCount = $query->executeQuery()->fetchNumeric();
@@ -87,13 +119,10 @@ class YetinderControler extends AbstractController
                 $this->addFlash('error', 'Yeti with given name already exists!');
                 return $this->redirectToRoute('addNew');
             }
-            
-            
-            // TODO Change to secure method = query builder "Table expression and columns are not escaped and are not safe for user-input."
 
             $queryBuilder = $conn->createQueryBuilder();
 
-            $queryBuilder->insert('yeti')
+            $queryBuilder->insert('yetis')
                 ->values([
                 'name' => '?',
                 'age' => '?',

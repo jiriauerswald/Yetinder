@@ -6,6 +6,7 @@
 {% block page_description %} Best Yetis you could find in Yetinder {% endblock %}
 
 {% block best_of %}
+
 {% for yeti in yetinder%}
 <div class="col">
 	<div class="card mb-4 rounded-3 shadow-sm">
@@ -16,7 +17,7 @@
 		</div>
 		<div class="card-body">
 			<h1 class="card-title pricing-card-title">
-				<small class="text-muted fw-light">Score: </small>{{ yeti.height }} {# temporarily cahnged from score to height #}
+				<small class="text-muted fw-light">Score: </small>{{ yeti.average_rating }}
 			</h1>
 			<ul class="list-unstyled mt-3 mb-4">
 
@@ -26,11 +27,7 @@
 				<li>Gender: {{ yeti.gender }}</li>
 				<li>Residence: {{ yeti.residence }}</li>
 
-			</ul>
-			{#
-			<button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign
-				up for free</button>
-			#}	
+			</ul>	
 		</div>
 	</div>
 </div>
