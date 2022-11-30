@@ -1,0 +1,39 @@
+{% extends 'yetinder.html.twig' %}
+{% block title %}Tinder | {{parent()}}{% endblock %}
+
+{% block page_title %}Tinder{% endblock %}
+{% block page_description %}Rate yeti randomly selected for you{% endblock %}
+
+{% block tinder %}
+<div class="col">
+	<div class="card mb-4 rounded-3 shadow-sm">
+		<div class="card-header py-3">
+			<h4 class="my-0 fw-normal">
+				{{ yeti.name }}
+			</h4>
+		</div>
+		<div class="card-body">
+			<h1 class="card-title pricing-card-title">
+				<small class="text-muted fw-light">Score: </small>
+				{{ yeti.height }}
+				{# temporarily changed from score to height #}
+			</h1>
+			<ul class="list-unstyled mt-3 mb-4">
+
+				<li>Height: {{ yeti.height }}</li>
+				<li>Weight: {{ yeti.weight }}</li>
+				<li>Age: {{ yeti.age }}</li>
+				<li>Gender: {{ yeti.gender }}</li>
+				<li>Residence: {{ yeti.residence }}</li>
+
+			</ul>
+			
+			{{ form(rate_yeti_form) }}
+			
+		</div>
+	</div>
+</div>
+
+{# {{ form(rate_yeti_form) }} #}
+
+{% endblock %}
