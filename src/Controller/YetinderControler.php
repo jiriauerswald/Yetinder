@@ -5,33 +5,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Entity\Yeti;
 use App\Form\AddNewYetiFormType;
 use App\Form\RateYetiFormType;
 use Doctrine\DBAL\DriverManager;
 
 class YetinderControler extends AbstractController
 {
-
     /**
      *
      * @Route("/", name="bestOf")
      */
     public function bestOf(): Response
     {
-
-        // TODO change parameter or getConnection to use .env to get url from there
         $conn = DriverManager::getConnection([
             'url' => $this->getParameter('DATABASE_URL')
         ]);
         // TODO limit value to shouldnt be hardcoded
-        
-        //Only rated yetis are selected.
-        $query = '
-        SELECT
-        yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
-        FROM `yetis` INNER JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id 
+        $query = 
+        'SELECT yetis.yeti_id, yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
+        FROM `yetis` LEFT JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id 
         GROUP BY yetis.yeti_id 
         ORDER BY average_rating
         DESC LIMIT 10';
@@ -59,11 +51,18 @@ class YetinderControler extends AbstractController
 
         // fetch yeti with radnomly selected id from database
         if (isset($randomYetiId)) {
-            $randomYetiQuery = $conn->prepare('SELECT * FROM yetis WHERE yeti_id = ?');
+            $randomYetiQuery = $conn->prepare('
+            SELECT yetis.yeti_id, yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
+            FROM `yetis` LEFT JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id 
+            WHERE yetis.yeti_id = ?            
+            GROUP BY yetis.yeti_id' 
+            );
             $randomYetiQuery->bindValue(1, $randomYetiId);
             $yeti = $randomYetiQuery->executeQuery()->fetchAssociative();
         }
-
+        
+       // if ($this->isCsrfTokenValid('_token', $request->request->get('rating_item'))){dd($form);}
+        
         if ($form->isSubmitted() && $form->isValid()) {
 
             $rating = $form->getData();
@@ -77,12 +76,12 @@ class YetinderControler extends AbstractController
                 ->setParameter(1, $rating["rating"]);
             $result = $queryBuilder->executeStatement();
             if ($result > 0) {
-                $this->addFlash('notice', 'Rating stored!');
+                $this->addFlash('notice', 'Rating of id ' . $rating["yeti_id"] . ' stored!');
             }
-
-            return $this->redirectToRoute($request->attributes->get('_route'));
+            //return $this->redirectToRoute($request->attributes->get('_route'));
         }
-
+        
+        // pass currently displayed yeti id to the form before submiting
         if (! $form->isSubmitted()) {
             $form->get('yeti_id')->setData($randomYetiId);
         }
@@ -112,7 +111,7 @@ class YetinderControler extends AbstractController
             ]);
 
             // Check if entered name already exists in db
-            $query = $conn->prepare("SELECT COUNT(name) FROM yeti WHERE name = ?");
+            $query = $conn->prepare("SELECT COUNT(name) FROM yetis WHERE name = ?");
             $query->bindValue(1, $yeti["name"]);
             $nameCount = $query->executeQuery()->fetchNumeric();
             if ($nameCount[0] > 0) {
