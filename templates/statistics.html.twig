@@ -1,0 +1,74 @@
+{% extends 'yetinder.html.twig' %}
+{% block title %}Statistics | {{parent()}}{% endblock %}
+
+{% block page_title %}Statistics{% endblock %}
+{% block page_description %}Rating statistics{% endblock %}
+
+{% block statistics %}
+
+<div class="table-responsive">
+
+	{#Day#}
+	<h2 class="display-6 text-center mb-4">Today</h2>
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th style="width: 34%;">Name</th>
+				<th style="width: 22%;">Average</th>
+				<th style="width: 22%;">Count</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for yeti in statsToday%}
+			<tr>
+				<th scope="row" class="text-start">{{yeti.name}}</th>
+				<td>{{yeti.average_rating}}</td>
+				<td>{{yeti.ratings_count}}</td>
+			</tr>
+		{% endfor %}	
+		</tbody>	
+	</table>
+	
+    {#Month#}
+    <h2 class="display-6 text-center mb-4">This month</h2>	
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th style="width: 34%;">Name</th>
+				<th style="width: 22%;">Average</th>
+				<th style="width: 22%;">Count</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for yeti in statsThisMonth%}
+			<tr>
+				<th scope="row" class="text-start">{{yeti.name}}</th>
+				<td>{{yeti.average_rating}}</td>
+				<td>{{yeti.ratings_count}}</td>
+			</tr>
+		{% endfor %}	
+		</tbody>	
+	</table>
+	
+	{#Year#}
+	<h2 class="display-6 text-center mb-4">This year</h2>	
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th style="width: 34%;">Name</th>
+				<th style="width: 22%;">Average</th>
+				<th style="width: 22%;">Count</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for yeti in statsThisYear%}
+			<tr>
+				<th scope="row" class="text-start">{{yeti.name}}</th>
+				<td>{{yeti.average_rating}}</td>
+				<td>{{yeti.ratings_count}}</td>
+			</tr>
+		{% endfor %}	
+		</tbody>	
+	</table>
+</div>
+{% endblock %}
