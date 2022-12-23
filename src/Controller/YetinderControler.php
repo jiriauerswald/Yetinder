@@ -21,13 +21,15 @@ class YetinderControler extends AbstractController
         $conn = DriverManager::getConnection([
             'url' => $this->getParameter('DATABASE_URL')
         ]);
-        // TODO limit value to shouldnt be hardcoded
-        $query = 'SELECT yetis.yeti_id, yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
+
+        $bestOfYetiCount = 10;
+        
+        $bestOfYetiQuery = 'SELECT yetis.yeti_id, yetis.name, yetis.gender, yetis.height, yetis.weight, yetis.residence, yetis.age, AVG(ratings.value) AS average_rating
         FROM `yetis` LEFT JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id 
         GROUP BY yetis.yeti_id 
         ORDER BY average_rating
-        DESC LIMIT 10';
-        $bestOf = $conn->fetchAllAssociative($query);
+        DESC LIMIT ' . $bestOfYetiCount;
+        $bestOf = $conn->fetchAllAssociative($bestOfYetiQuery);
         return $this->render('best_of.html.twig', [
             'yetinder' => $bestOf
         ]);
@@ -152,6 +154,7 @@ class YetinderControler extends AbstractController
         $conn = DriverManager::getConnection([
             'url' => $this->getParameter('DATABASE_URL')
         ]);
+        
         $statsQuery = $conn->prepare('
         SELECT yetis.yeti_id, yetis.name, AVG(ratings.value) AS average_rating, COUNT(ratings.rating_id) AS ratings_count
         FROM `yetis` LEFT JOIN `ratings` ON yetis.yeti_id = ratings.yeti_id

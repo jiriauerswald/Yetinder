@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.2.0
+- https://www.phpmyadmin.net
+-
+- Počítač: 127.0.0.1
+- Vytvořeno: Ned 18. pro 2022, 18:40
+- Verze serveru: 10.4.24-MariaDB
+- Verze PHP: 8.1.6
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="yetinder" collation="utf8mb4_general_ci" charset="utf8mb4">
+            <pma:table name="ratings">
+                CREATE TABLE `ratings` (
+                  `rating_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `yeti_id` int(11) unsigned NOT NULL,
+                  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+                  `value` tinyint(4) NOT NULL,
+                  PRIMARY KEY (`rating_id`),
+                  KEY `Yeti_id_key` (`yeti_id`),
+                  CONSTRAINT `Yeti_id_key` FOREIGN KEY (`yeti_id`) REFERENCES `yetis` (`yeti_id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4;
+            </pma:table>
+            <pma:table name="yetis">
+                CREATE TABLE `yetis` (
+                  `yeti_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                  `name` varchar(30) NOT NULL,
+                  `gender` varchar(10) NOT NULL,
+                  `height` int(10) unsigned DEFAULT NULL,
+                  `weight` int(10) unsigned DEFAULT NULL,
+                  `residence` varchar(50) NOT NULL DEFAULT &#039;Undefined&#039;,
+                  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+                  `age` int(10) unsigned DEFAULT NULL,
+                  PRIMARY KEY (`yeti_id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Databáze: 'yetinder'
+    -->
+    <database name="yetinder">
+        <!-- Tabulka ratings -->
+        <table name="ratings">
+            <column name="rating_id">21</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-11-30 17:22:22</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">22</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-11-30 17:22:37</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">23</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-11-30 17:22:52</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">24</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-11-30 17:23:05</column>
+            <column name="value">1</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">25</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-11-30 17:24:07</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">26</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-11-30 17:24:42</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">27</column>
+            <column name="yeti_id">1</column>
+            <column name="timestamp">2022-11-30 17:24:51</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">28</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:00:48</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">29</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 20:00:54</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">30</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 20:01:02</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">31</column>
+            <column name="yeti_id">1</column>
+            <column name="timestamp">2022-12-02 20:01:07</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">32</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 20:01:11</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">33</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 20:01:14</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">34</column>
+            <column name="yeti_id">6</column>
+            <column name="timestamp">2022-12-02 20:01:19</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">35</column>
+            <column name="yeti_id">6</column>
+            <column name="timestamp">2022-12-02 20:01:25</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">36</column>
+            <column name="yeti_id">1</column>
+            <column name="timestamp">2022-12-02 20:01:29</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">37</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 20:01:32</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">38</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:01:36</column>
+            <column name="value">1</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">39</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:01:40</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">40</column>
+            <column name="yeti_id">6</column>
+            <column name="timestamp">2022-12-02 20:01:43</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">41</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:01:46</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">42</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 20:01:48</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">43</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:01:51</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">44</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 20:01:54</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">45</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:01:57</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">46</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:52:41</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">47</column>
+            <column name="yeti_id">16</column>
+            <column name="timestamp">2022-12-02 20:52:45</column>
+            <column name="value">1</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">48</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 20:52:49</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">49</column>
+            <column name="yeti_id">18</column>
+            <column name="timestamp">2022-12-02 20:52:54</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">50</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:52:59</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">51</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:53:03</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">52</column>
+            <column name="yeti_id">18</column>
+            <column name="timestamp">2022-12-02 20:53:06</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">53</column>
+            <column name="yeti_id">20</column>
+            <column name="timestamp">2022-12-02 20:53:12</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">54</column>
+            <column name="yeti_id">17</column>
+            <column name="timestamp">2022-12-02 20:53:16</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">55</column>
+            <column name="yeti_id">16</column>
+            <column name="timestamp">2022-12-02 20:53:19</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">56</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 20:53:22</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">57</column>
+            <column name="yeti_id">6</column>
+            <column name="timestamp">2022-12-02 20:53:25</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">58</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:53:29</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">59</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:53:33</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">60</column>
+            <column name="yeti_id">16</column>
+            <column name="timestamp">2022-12-02 20:53:36</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">61</column>
+            <column name="yeti_id">6</column>
+            <column name="timestamp">2022-12-02 20:53:40</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">62</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-02 20:53:44</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">63</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-02 20:53:48</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">64</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 20:53:51</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">65</column>
+            <column name="yeti_id">17</column>
+            <column name="timestamp">2022-12-02 20:53:54</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">66</column>
+            <column name="yeti_id">1</column>
+            <column name="timestamp">2022-12-02 20:54:16</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">67</column>
+            <column name="yeti_id">16</column>
+            <column name="timestamp">2022-12-02 20:54:21</column>
+            <column name="value">1</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">68</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 20:54:25</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">69</column>
+            <column name="yeti_id">17</column>
+            <column name="timestamp">2022-12-02 20:54:32</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">70</column>
+            <column name="yeti_id">20</column>
+            <column name="timestamp">2022-12-02 20:54:36</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">71</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-12-02 20:54:39</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">72</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 20:54:44</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">73</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 20:54:47</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">74</column>
+            <column name="yeti_id">20</column>
+            <column name="timestamp">2022-12-02 20:54:54</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">75</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-02 20:55:45</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">76</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 21:00:28</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">77</column>
+            <column name="yeti_id">1</column>
+            <column name="timestamp">2022-12-02 21:01:33</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">78</column>
+            <column name="yeti_id">17</column>
+            <column name="timestamp">2022-12-02 21:01:40</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">79</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 21:03:04</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">80</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 21:04:00</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">81</column>
+            <column name="yeti_id">20</column>
+            <column name="timestamp">2022-12-02 21:04:21</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">82</column>
+            <column name="yeti_id">18</column>
+            <column name="timestamp">2022-12-02 21:04:29</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">83</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 21:04:44</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">84</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 21:05:13</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">85</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-02 21:05:23</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">86</column>
+            <column name="yeti_id">7</column>
+            <column name="timestamp">2022-12-02 21:57:49</column>
+            <column name="value">4</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">87</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-02 21:58:41</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">88</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-02 22:06:01</column>
+            <column name="value">3</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">89</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-02 22:07:52</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">90</column>
+            <column name="yeti_id">8</column>
+            <column name="timestamp">2022-12-02 22:08:53</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">91</column>
+            <column name="yeti_id">5</column>
+            <column name="timestamp">2022-12-07 19:35:13</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">92</column>
+            <column name="yeti_id">2</column>
+            <column name="timestamp">2022-12-07 19:35:24</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">93</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-11-27 21:19:07</column>
+            <column name="value">2</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">94</column>
+            <column name="yeti_id">10</column>
+            <column name="timestamp">2022-11-23 21:19:16</column>
+            <column name="value">1</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">95</column>
+            <column name="yeti_id">18</column>
+            <column name="timestamp">2022-12-07 22:06:45</column>
+            <column name="value">5</column>
+        </table>
+        <table name="ratings">
+            <column name="rating_id">96</column>
+            <column name="yeti_id">19</column>
+            <column name="timestamp">2022-12-07 22:09:05</column>
+            <column name="value">2</column>
+        </table>
+        <!-- Tabulka yetis -->
+        <table name="yetis">
+            <column name="yeti_id">1</column>
+            <column name="name">Bigfoot</column>
+            <column name="gender">Male</column>
+            <column name="height">261</column>
+            <column name="weight">147</column>
+            <column name="residence">Zaly</column>
+            <column name="created">2022-10-29 00:00:00</column>
+            <column name="age">45</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">2</column>
+            <column name="name">Snowflake</column>
+            <column name="gender">Female</column>
+            <column name="height">211</column>
+            <column name="weight">99</column>
+            <column name="residence">Vapenice</column>
+            <column name="created">2022-10-29 00:00:00</column>
+            <column name="age">32</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">5</column>
+            <column name="name">Fowe</column>
+            <column name="gender">Male</column>
+            <column name="height">205</column>
+            <column name="weight">102</column>
+            <column name="residence">Lisci hora</column>
+            <column name="created">2022-11-15 00:00:00</column>
+            <column name="age">26</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">6</column>
+            <column name="name">Fox</column>
+            <column name="gender">Female</column>
+            <column name="height">201</column>
+            <column name="weight">108</column>
+            <column name="residence">Lisci kopec</column>
+            <column name="created">2022-11-15 00:00:00</column>
+            <column name="age">32</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">7</column>
+            <column name="name">Freya</column>
+            <column name="gender">Female</column>
+            <column name="height">219</column>
+            <column name="weight">112</column>
+            <column name="residence">Jankuv kopec</column>
+            <column name="created">2022-11-15 00:00:00</column>
+            <column name="age">29</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">8</column>
+            <column name="name">Etokal</column>
+            <column name="gender">Male</column>
+            <column name="height">268</column>
+            <column name="weight">154</column>
+            <column name="residence">Violik</column>
+            <column name="created">2022-11-15 00:00:00</column>
+            <column name="age">43</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">10</column>
+            <column name="name">Yaddu</column>
+            <column name="gender">Male</column>
+            <column name="height">205</column>
+            <column name="weight">108</column>
+            <column name="residence">Violik</column>
+            <column name="created">2022-11-18 00:00:00</column>
+            <column name="age">26</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">16</column>
+            <column name="name">Kize</column>
+            <column name="gender">Female</column>
+            <column name="height">241</column>
+            <column name="weight">112</column>
+            <column name="residence">Struhadlo</column>
+            <column name="created">2022-12-02 00:00:00</column>
+            <column name="age">38</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">17</column>
+            <column name="name">Ikaro</column>
+            <column name="gender">Male</column>
+            <column name="height">281</column>
+            <column name="weight">161</column>
+            <column name="residence">Stoh</column>
+            <column name="created">2022-12-02 00:00:00</column>
+            <column name="age">42</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">18</column>
+            <column name="name">Evroph</column>
+            <column name="gender">Male</column>
+            <column name="height">222</column>
+            <column name="weight">127</column>
+            <column name="residence">Planina</column>
+            <column name="created">2022-12-02 00:00:00</column>
+            <column name="age">28</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">19</column>
+            <column name="name">Onuru</column>
+            <column name="gender">Male</column>
+            <column name="height">278</column>
+            <column name="weight">176</column>
+            <column name="residence">Kotel</column>
+            <column name="created">2022-12-02 00:00:00</column>
+            <column name="age">63</column>
+        </table>
+        <table name="yetis">
+            <column name="yeti_id">20</column>
+            <column name="name">Meraph</column>
+            <column name="gender">Female</column>
+            <column name="height">231</column>
+            <column name="weight">143</column>
+            <column name="residence">Mechovinec</column>
+            <column name="created">2022-12-02 00:00:00</column>
+            <column name="age">47</column>
+        </table>
+    </database>
+</pma_xml_export>
